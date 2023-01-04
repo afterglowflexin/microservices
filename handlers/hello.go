@@ -16,11 +16,11 @@ func NewHello(l *log.Logger) *Hello {
 }
 
 func (h *Hello) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	h.l.Println("Hello, world!")
+	h.l.Println("Hello World")
 	d, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		http.Error(w, "Ooops", http.StatusBadRequest)
-		return
+		http.Error(w, "Error while reading", http.StatusBadRequest)
 	}
-	fmt.Fprintf(w, "Hello %s\n", d)
+
+	fmt.Fprintf(w, "Data: %s\n", d)
 }
