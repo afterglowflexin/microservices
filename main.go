@@ -26,8 +26,8 @@ func main() {
 		Addr:         ":9090",
 		Handler:      sm,
 		ErrorLog:     l,
-		ReadTimeout:  1 * time.Second,   // max time to read request from the client
-		WriteTimeout: 1 * time.Second,   // max time to write the response to the client
+		ReadTimeout:  5 * time.Second,   // max time to read request from the client
+		WriteTimeout: 10 * time.Second,  // max time to write the response to the client
 		IdleTimeout:  120 * time.Second, // max time for connections using TCP Keep-Alive
 	}
 
