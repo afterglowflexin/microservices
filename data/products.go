@@ -10,7 +10,12 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
+// swagger:model
 type Product struct {
+	// the id for this user
+	//
+	// required: true
+	// min: 1
 	ID          int     `json:"id"`
 	Name        string  `json:"name" validate:"required"`
 	Description string  `json:"description"`
@@ -40,11 +45,11 @@ func validateSKU(fl validator.FieldLevel) bool {
 	re := regexp.MustCompile(`[a-z]+-[a-z]+-[a-z]+`)
 	matches := re.FindAllString(fl.Field().String(), -1)
 
-	if len(matches) != 1 {
-		return false
+	if len(matches) == 1 {
+		return true
 	}
 
-	return true
+	return false
 }
 
 func (p *Products) ToJSON(w io.Writer) error {
@@ -69,6 +74,17 @@ func UpdateProduct(id int, p *Product) error {
 
 	p.ID = id
 	productList[pos] = p
+	return nil
+}
+
+func DeleteProduct(id int) error {
+	_, pos, err := findProduct(id)
+	if err != nil {
+		return err
+	}
+
+	productList = append(productList[:pos], productList[(pos+1):]...)
+
 	return nil
 }
 
