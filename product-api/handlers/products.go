@@ -28,8 +28,8 @@ type productsResponseWrapper struct {
 	Body []data.Product
 }
 
-// swagger:response noContent
-type productsNoContentWrapper struct {
+// swagger:response noContentResponse
+type noContentResponseWrapper struct {
 }
 
 // swagger:parameters deleteProduct

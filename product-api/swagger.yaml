@@ -60,6 +60,18 @@ paths:
                     $ref: '#/responses/noContent'
             tags:
                 - products
+        put:
+            description: Update a products details
+            operationId: updateProduct
+            responses:
+                "201":
+                    $ref: '#/responses/noContentResponse'
+                "404":
+                    $ref: '#/responses/errorResponse'
+                "422":
+                    $ref: '#/responses/errorValidation'
+            tags:
+                - products
     /products/{id}:
         delete:
             description: Deletes a product
@@ -75,12 +87,16 @@ paths:
             responses:
                 "201":
                     $ref: '#/responses/noContent'
+                "404":
+                    $ref: '#/responses/errorResponse'
+                "501":
+                    $ref: '#/responses/errorResponse'
             tags:
                 - products
 produces:
     - application/json
 responses:
-    noContent:
+    noContentResponse:
         description: ""
     productsResponse:
         description: A list of products returns it the response
